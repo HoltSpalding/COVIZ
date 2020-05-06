@@ -14,3 +14,6 @@ SELECT * FROM county_map_color_data;
 
 
 SELECT info FROM county_map_color_data WHERE CAST(id AS VARCHAR) = '12220';
+
+
+heroku pg:push postgresql:///covizdb DATABASE_URL --app coviz-app
