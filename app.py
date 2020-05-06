@@ -21,7 +21,7 @@ def hello():
         # stategraph = StateGraph.query.all()
         # countygraph = CountyGraph.query.all()
         #print(jsonify([e.serialize() for e in statecol]))
-        print(jsonify([e.serialize() for e in countycol]))
+        # print(jsonify([e.serialize() for e in countycol]))
         # print(jsonify([e.serialize() for e in stategraph]))
         # print(jsonify([e.serialize() for e in countygraph]))
         return  jsonify([e.serialize() for e in statecol])
