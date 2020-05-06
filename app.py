@@ -17,9 +17,9 @@ def hello():
     tmp = 12220
     try:
         statecol=StateColor.query.filter_by(id=tmp)
-        countycol=CountyColor.query.all()
-        stategraph = StateGraph.query.all()
-        countygraph = CountyGraph.query.all()
+        # countycol=CountyColor.query.all()
+        # stategraph = StateGraph.query.all()
+        # countygraph = CountyGraph.query.all()
         #print(jsonify([e.serialize() for e in statecol]))
         print(jsonify([e.serialize() for e in countycol]))
         # print(jsonify([e.serialize() for e in stategraph]))
