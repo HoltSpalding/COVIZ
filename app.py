@@ -24,7 +24,7 @@ def hello():
         print(jsonify([e.serialize() for e in countycol]))
         # print(jsonify([e.serialize() for e in stategraph]))
         # print(jsonify([e.serialize() for e in countygraph]))
-        return  jsonify([e.serialize() for e in countygraph])
+        return  jsonify([e.serialize() for e in statecol])
     except Exception as e:
         return(str(e))
 
