@@ -1,0 +1,128 @@
+function redraw_slider(){
+    var slider_dims = document.getElementById('slidercard').getBoundingClientRect()
+    var slider_width = (slider_dims.width).toString();
+    var slider_height = (slider_dims.height+100).toString();
+
+    slider_svg.attr("preserveAspectRatio", "xMinYMin meet")
+                .attr("viewBox", "0 0 " + slider_width + " " + slider_height)
+
+
+}
+window.addEventListener("resize", redraw_slider);
+
+
+
+var moving = false;
+var currentValue = 0;
+var targetValue = slider_width*0.9;
+
+var formatDateIntoMonth = d3.timeFormat("%b");
+var formatDate = d3.timeFormat("%b %d %Y");
+var parseDate = d3.timeParse("%m/%d/%y");
+
+var startDate = new Date("2020-01-23"),
+    endDate = new Date("2020-04-30");
+    var slider_dims = document.getElementById('slidercard').getBoundingClientRect()
+    var slider_width = (slider_dims.width).toString();
+    var slider_height = (slider_dims.height+100).toString();
+
+var slider_svg = d3.select("#slidersvg")
+                    .append("svg")
+                    .classed("svg-container", true) 
+                    .attr("preserveAspectRatio", "xMinYMin meet")
+                    .attr("viewBox", "0 0 " + slider_width + " " + slider_height)
+                    .classed("svg-content-responsive", true)
+                    .attr("width", 600)
+                    .attr("height", 400);
+
+var x = d3.scaleTime()
+    .domain([startDate, endDate])
+    .range([0, targetValue])
+    .clamp(true);
+
+var slider = slider_svg.append("g")
+                .attr("class", "slider")
+                .attr("transform", "translate(" + 50 + "," + slider_height/2 + ")");
+
+slider.append("line")
+        .attr("class", "track")
+        .attr("x1", x.range()[0])
+        .attr("x2", x.range()[1])
+        .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+        .attr("class", "track-inset")
+        .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+        .attr("class", "track-overlay")
+        .call(d3.drag()
+                .on("start.interrupt", function() { slider.interrupt(); })
+                .on("start drag", function() {
+                    currentValue = d3.event.x;
+                update(x.invert(currentValue)); 
+        }));
+
+slider.insert("g", ".track-overlay")
+    .attr("class", "ticks")
+    .attr("transform", "translate(0," + 18 + ")")
+    .selectAll("text")
+    .data(x .ticks(4))
+    .enter()
+    .append("text")
+    .attr("x",x )
+    .attr("y", 4)
+    .attr("text-anchor", "middle")
+    .text(function(d) { return formatDateIntoMonth(d); });
+
+var handle = slider.insert("circle", ".track-overlay")
+    .attr("class", "handle")
+    .attr("r", 9);
+
+var label = slider.append("text")  
+    .attr("class", "label")
+    .attr("text-anchor", "middle")
+    .text(formatDate(startDate))
+    .attr("transform", "translate(0," + (-25) + ")")
+
+
+function update(h) {
+  // update position and text of label according to slider scale
+  handle.attr("cx", x(h));
+  label
+    .attr("x", x(h))
+    .text(formatDate(h));
+  console.log(formatDate(h))
+  console.log(h)
+  var formatDate2 = d3.timeFormat("%m %d %Y");
+
+  date = formatDate2(h).split(" ")
+  date = date[0].replace(/\b0+/g, '')+ "/" + date[1].replace(/\b0+/g, '') + "/20"
+  console.log(date)
+
+
+
+
+
+
+
+
+
+
+              <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center" id="slidercard">
+                     <div class="col-sm-2"><p id="value-time"></p></div>
+                      <div class="col-sm"><div id="slider-time"></div></div>
+                    <!--  <div id="value-time"> </div>
+                      <div id="slider-time"> </div>
+                     <div class="col mr-2" id="slidercard">
+
+
+                      <div class="col-sm-2 "><p id="value-time"></p></div>
+                      <div class="col-sm"><div id="slider-time"></div></div>
+
+                    <div class="col-auto">
+                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
+                  </div> -->
+                </div>
+              </div>
+            </div>
