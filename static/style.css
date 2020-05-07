@@ -1,0 +1,21 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 24px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 1.6; 
+}
+h1 {
+  font-size:2em;
+}
+
+.chart-area {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 75%;
+    vertical-align: top;
+    overflow: hidden;
+}
+.svg-content {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
