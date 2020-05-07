@@ -1,4 +1,77 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 24px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 1.6; 
+}
+/*date size*/
+#value-time {
+  margin-bottom: -10px;
+/*  font-size:50px;*/
+}
 
-        #value-time {
-                font-size:50px;
-              }
+
+
+/*US map*/
+.background {
+    fill: none;
+    pointer-events: all;
+}
+
+#states {
+    fill: white;
+}
+
+#states .active {
+    display:none;
+}
+
+#state-borders {
+    fill: none;
+    stroke: black;
+    stroke-width: .5px;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    pointer-events: none;
+}
+
+.county-boundary {
+    fill: none;
+    stroke: black;
+    stroke-width: .2px;
+}
+
+.county-boundary:hover, .state:hover {
+    fill: blue;
+}
+
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips specifically */
+.d3-tip.n:after {
+  margin: -2px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+
+.chart-area {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 75%;
+    vertical-align: top;
+    overflow: hidden;
+}
+.svg-content {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
